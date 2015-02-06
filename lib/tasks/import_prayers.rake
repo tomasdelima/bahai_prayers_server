@@ -1,41 +1,12 @@
 namespace :import_prayers do
-  desc 'Imports all JSON prayers in the given folder'
-  task :run, [:files]  => :environment  do |t, args|
-    # rake import_prayers:run[/home/tomas/Desktop/parse-xhtml-json/*.json]
-
-    filenames = Dir[args.files]
-    prayer_count = 0
-
-    filenames.each do |filename|
-      begin
-        if filename[-6].match(/\d/) && !filename.match('nota')
-          file = JSON(File.read(filename))
-          category_name = file['category'].mb_chars.capitalize.gsub(/(\.|X\-)/,'')
-          category = Category.find_by(title: category_name) || Category.create(title: category_name)
-          prayer = Prayer.new(author: file['author'], body: file['body'], category: category)
-
-          if prayer.save
-            puts filename
-            prayer_count += 1
-          else
-            puts "Error importing prayer: #{filename}"
-          end
-        end
-      rescue => e
-        puts "Error: #{e}"
-        puts "Prayer: #{filename}"
-      end
-    end
-    puts "Finished importing #{prayer_count} prayers"
-  end
-
-  desc 'Converts all XHTML prayers into JSON prayers'
+  desc 'Imports all XHTML prayers into the DB'
   task 'xhtml-to-json', [:files] => :environment do |t, args|
     # rake import_prayers:xhtml-to-json[/home/tomas/Desktop/parse-xhtml-json/*.xhtml]
     files = Dir[args.files]
     count = 0
+    save_count = 0
 
-    puts "Converting #{files.count} prayers"
+    puts "Importing #{files.count} prayers"
     files.each do |filename|
       file = File.read(filename)
       p_file = Nokogiri.parse(file).to_str
@@ -132,43 +103,32 @@ namespace :import_prayers do
       p_file = p_file.gsub(' tuas ', ' Tuas ')
       p_file = p_file.gsub(' ti ', ' Ti ')
       p_file = p_file.gsub(' tu ', ' Tu ')
+      p_file = p_file.gsub(' senhor', ' Senhor')
 
       # p_file = p_file.gsub()
 
-      filename2 = filename[0..-7].gsub(/\/[xz]\-/, '/')
+      category_name = filename.split('/')[-1].split('.')[0].gsub(/\d/,'').gsub(/[zxZX]\-/,'').gsub(/\A(\w)/){|s| $1.mb_chars.capitalize}
+      body = p_file.split("\n")[0..-2].join("\n")
+      author = p_file.split("\n")[-1].mb_chars.capitalize.gsub('‘a','‘A').gsub('bab','Báb').gsub('báb','Báb')
 
-      category = filename.split('/')[-1].split('.')[0].gsub(/\d/,'').gsub(/\A(\w)/){|s| $1.mb_chars.capitalize}
-
-      j_file = JSON({
-        body: p_file.split("\n")[0..-2].join("\n"),
-        author: p_file.split("\n")[-1].mb_chars.capitalize.gsub('‘a','‘A'),
-        category: category
-      })
-
-      if category[-4..-1] != 'home'
+      if category_name[-4..-1] != 'home' && !category_name.match('Nota')
         begin
-          if filename[-6].match(/\d/) && !filename.match('nota')
-            category_name = j_file['category'].mb_chars.capitalize.gsub(/(\.|X\-)/,'')
-            category = Category.find_by(title: category_name) || Category.create(title: category_name)
-            prayer = Prayer.new(author: j_file['author'], body: j_file['body'], category: category)
+          category = Category.find_by(title: category_name) || Category.create(title: category_name)
+          prayer = Prayer.new(author: author, body: body, category: category)
 
-            if prayer.save
-              puts filename
-              prayer_count += 1
-            else
-              puts "Error importing prayer: #{filename}"
-            end
+          if prayer.save
+            puts category_name
+            save_count += 1
+          else
+            puts "Error importing prayer: #{filename}"
           end
         rescue => e
           puts "Error: #{e}"
           puts "Prayer: #{filename}"
         end
-
         count += 1
-      else
-        puts "Falied saving file: #{filename2}"
       end
     end
-    puts "Converted #{count} prayers"
+    puts "Imported #{count} prayers"
   end
 end
