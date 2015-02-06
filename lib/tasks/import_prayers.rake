@@ -145,7 +145,25 @@ namespace :import_prayers do
         category: category
       })
 
-      if category[-4..-1] != 'home' && File.write(filename2+'.json', j_file)
+      if category[-4..-1] != 'home'
+        begin
+          if filename[-6].match(/\d/) && !filename.match('nota')
+            category_name = j_file['category'].mb_chars.capitalize.gsub(/(\.|X\-)/,'')
+            category = Category.find_by(title: category_name) || Category.create(title: category_name)
+            prayer = Prayer.new(author: j_file['author'], body: j_file['body'], category: category)
+
+            if prayer.save
+              puts filename
+              prayer_count += 1
+            else
+              puts "Error importing prayer: #{filename}"
+            end
+          end
+        rescue => e
+          puts "Error: #{e}"
+          puts "Prayer: #{filename}"
+        end
+
         count += 1
       else
         puts "Falied saving file: #{filename2}"
