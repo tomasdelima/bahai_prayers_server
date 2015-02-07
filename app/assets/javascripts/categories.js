@@ -1,8 +1,8 @@
-function sendRequest(id, newValue){
+function sendRequest(id, key, value){
   $.ajax({
     url:'categories',
     type: 'POST',
-    data: {id: id, value: newValue},
+    data: {id: id, key: key, value: value},
     success: function(a){
       alert(a.message)
     }
@@ -10,12 +10,18 @@ function sendRequest(id, newValue){
 }
 
 function listenToSave (){
-  $('.category input').on('keypress', function(event){
+  $('.category input.left').on('keypress', function(event){
     if(event.which == 13) {
       id = $(event.target).attr('id')
-      newValue = $('#'+id).val()
-      sendRequest(id, newValue)
+      title = $('#'+id).val()
+      sendRequest(id, 'title', title)
     }
+  })
+
+  $('.category input.middle').on('click', function(event){
+    id = $(event.target).data('id')
+    active = $(event.target).prop('checked')
+    sendRequest(id, 'active', active)
   })
 }
 

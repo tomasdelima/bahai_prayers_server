@@ -9,6 +9,10 @@
 .categories .category input {
 }
 
+.categories .category .middle {
+  width: 100px;
+}
+
 .categories .category .left {
   width: 230px;
 }
@@ -17,7 +21,7 @@
   width: 125px;
 }
 
-.category .left, .category .right {
+.category .left, .category .middle , .category .right {
   display: inline-block;
   text-align: center;
 }

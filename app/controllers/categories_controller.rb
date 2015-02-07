@@ -3,7 +3,10 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     @categories = @categories.where("updated_at > '#{Time.at(Integer(params[:last_updated_at])/1000)}'") if params[:last_updated_at]
     respond_to do |format|
-      format.json { render json: @categories.to_json }
+      format.json do
+        @categories = @categories.where(active: true)
+        render json: @categories.to_json
+      end
       format.html { render :index }
     end
   end
@@ -14,7 +17,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    Category.find(params[:id]).update_attribute(:title, params[:value])
+    Category.find(params[:id]).update_attribute(params[:key], params[:value])
     render json: {message: 'Categoria salva com sucesso'}
   end
 end
