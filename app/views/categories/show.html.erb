@@ -1,0 +1,10 @@
+<div class="prayers">
+  <h1>Listando todas orações da categoria "<%= @category.title %>":</h1>
+  <% @prayers.each do |prayer| %>
+    <div class='prayer'>
+      <div class="left" id="<%= prayer.id %>"><%= prayer.body %></div>
+      <div class="right">&mdash; <%= prayer.author %></div>
+      <hr>
+    </div>
+  <% end %>
+</div>

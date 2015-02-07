@@ -1,0 +1,13 @@
+<div class="categories">
+  <h1>Listando todas categorias:</h1>
+  <div class="category">
+    <h3 class="left">Nome da categoria</h3>
+    <h3 class="right"># orações</h3>
+  </div>
+  <% @categories.sort_by{|a,b| a.title}.each do |category| %>
+    <div class='category'>
+      <input class="left" value="<%= category.title %>" id="<%= category.id %>"/>
+      <%= link_to category.prayers.length, category_path(category.id), class: "right" %>
+    </div>
+  <% end %>
+</div>

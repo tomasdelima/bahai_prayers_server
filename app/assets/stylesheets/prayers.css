@@ -1,0 +1,18 @@
+.prayers {
+  padding: 20px;
+}
+
+.prayers .prayer {
+  margin: 20px;
+}
+
+.prayers .prayer .left {
+  text-align: justify;
+}
+
+.prayers .prayer .right {
+  text-align: right;
+}
+
+.prayer .left, .prayer .right {
+}

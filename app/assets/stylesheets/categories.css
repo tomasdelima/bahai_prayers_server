@@ -1,0 +1,23 @@
+.categories {
+  padding: 20px;
+}
+
+.categories .category {
+  margin-left: 20px;
+}
+
+.categories .category input {
+}
+
+.categories .category .left {
+  width: 230px;
+}
+
+.categories .category .right {
+  width: 125px;
+}
+
+.category .left, .category .right {
+  display: inline-block;
+  text-align: center;
+}

@@ -2,6 +2,7 @@ namespace :import_prayers do
   desc 'Imports all XHTML prayers into the DB'
   task 'xhtml-to-json', [:files] => :environment do |t, args|
     # rake import_prayers:xhtml-to-json[/home/tomas/Desktop/parse-xhtml-json/*.xhtml]
+    # heroku run rake import_prayers:xhtml-to-json[db/initial-prayers/*.xhtml]
     files = Dir[args.files]
     count = 0
     save_count = 0
