@@ -8,11 +8,23 @@
 
 .prayers .prayer .left {
   text-align: justify;
+  width: 100%;
+  height: 100px;
+  resize: none;
+  height: 250px;
 }
 
 .prayers .prayer .right {
   text-align: right;
 }
 
-.prayer .left, .prayer .right {
+.prayers .prayer .right input {
+  text-align: left;
+  width: 190px;
+}
+
+.prayer .left, .prayer .right, .prayer .right input {
+  border: none;
+  font-size: 18px;
+  font-family: Helvica;
 }

@@ -11,6 +11,8 @@ function sendRequest(id, key, value){
 
 function listenToSave (){
   $('.category input.left').on('keypress', function(event){
+    var id, title, active
+
     if(event.which == 13) {
       id = $(event.target).attr('id')
       title = $('#'+id).val()

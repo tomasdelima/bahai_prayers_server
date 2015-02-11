@@ -1,9 +1,12 @@
 <div class="prayers">
   <h1>Listando todas orações da categoria "<%= @category.title %>":</h1>
-  <% @prayers.each do |prayer| %>
+  <% @prayers.order(:body).each do |prayer| %>
     <div class='prayer'>
-      <div class="left" id="<%= prayer.id %>"><%= prayer.body %></div>
-      <div class="right">&mdash; <%= prayer.author %></div>
+      <%= text_area_tag "prayer#{prayer.id}", prayer.body, class: "left id#{prayer.id}" %>
+      <div class="right">
+        &mdash; <input class="id<%= prayer.id %>" value="<%= prayer.author %>">
+      </div>
+      <button data-id="<%= prayer.id %>">Salvar</button>
       <hr>
     </div>
   <% end %>

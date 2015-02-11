@@ -5,4 +5,6 @@ BahaiPrayersServer::Application.routes.draw do
   end
 
   post 'categories', to: 'categories#update'
+  post 'prayers',    to: 'prayers#update'
+  post 'categories/prayers',    to: 'prayers#update'
 end
