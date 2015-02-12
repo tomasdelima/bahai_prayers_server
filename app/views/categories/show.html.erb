@@ -3,7 +3,7 @@
   <% @prayers.order(:body).each do |prayer| %>
     <div class='prayer'>
       <%= label_tag :preamble %>
-      <input value="<%= prayer.preamble %>" class="preamble id<%= prayer.id %>" %>
+      <input class="preamble id<%= prayer.id %>" value="<%= prayer.preamble %>" %>
       <%= label_tag :body %>
       <%= text_area_tag "prayer#{prayer.id}", prayer.body, class: "body body id#{prayer.id}" %>
       <%= label_tag :author %>

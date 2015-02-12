@@ -3,8 +3,8 @@ function sendRequest(id, key, value){
     url:'prayers',
     type: 'POST',
     data: {id: id, key: key, value: value},
-    success: function(a){
-      if(key == 'author') { alert(a.message) }
+    success: function(d){
+      alert(d.message)
     },
     error: function(e){
       alert(e.message)
