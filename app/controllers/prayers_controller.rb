@@ -7,7 +7,7 @@ class PrayersController < ApplicationController
   end
 
   def update
-    Prayer.find(params[:id]).update_attributes(body: params[:body], author: params[:author])
+    Prayer.find(params[:id]).update_attribute(params[:key], params[:value])
     render json: {message: 'Oração salva com sucesso'}
   end
 end

@@ -5,6 +5,9 @@ function sendRequest(id, key, value){
     data: {id: id, key: key, value: value},
     success: function(a){
       alert(a.message)
+    },
+    error: function(e){
+      alert(e.message)
     }
   })
 }

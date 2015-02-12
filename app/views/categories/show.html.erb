@@ -2,10 +2,12 @@
   <h1>Listando todas orações da categoria "<%= @category.title %>":</h1>
   <% @prayers.order(:body).each do |prayer| %>
     <div class='prayer'>
-      <%= text_area_tag "prayer#{prayer.id}", prayer.body, class: "left id#{prayer.id}" %>
-      <div class="right">
-        &mdash; <input class="id<%= prayer.id %>" value="<%= prayer.author %>">
-      </div>
+      <%= label_tag :preamble %>
+      <input value="<%= prayer.preamble %>" class="preamble id<%= prayer.id %>" %>
+      <%= label_tag :body %>
+      <%= text_area_tag "prayer#{prayer.id}", prayer.body, class: "body body id#{prayer.id}" %>
+      <%= label_tag :author %>
+      <input class="author id<%= prayer.id %>" value="<%= prayer.author %>">
       <button data-id="<%= prayer.id %>">Salvar</button>
       <hr>
     </div>

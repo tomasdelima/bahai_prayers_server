@@ -6,25 +6,32 @@
   margin: 20px;
 }
 
-.prayers .prayer .left {
+.prayers .prayer .preamble {
+  font-style: italic;
+}
+
+.prayers .prayer .body {
   text-align: justify;
+  resize: vertical;
+  min-height: 150px;
+}
+
+.prayers .prayer .author {
+}
+
+.prayers .prayer .author input {
+}
+
+.prayer .preamble, .prayer .body, .prayer .author {
   width: 100%;
-  height: 100px;
-  resize: none;
-  height: 250px;
-}
-
-.prayers .prayer .right {
-  text-align: right;
-}
-
-.prayers .prayer .right input {
-  text-align: left;
-  width: 190px;
-}
-
-.prayer .left, .prayer .right, .prayer .right input {
-  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+  border: 2px solid #aaa;
   font-size: 18px;
   font-family: Helvica;
+}
+
+.prayer button {
+  margin-bottom: 15px;
 }
