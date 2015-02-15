@@ -9,10 +9,15 @@ class PrayersController < ApplicationController
   end
 
   def update
-    if Prayer.find(params[:id]).update_attribute(params[:key], params[:value])
+    begin
+      prayer = Prayer.find(params[:id])
+      params[:data].each do |data|
+        prayer.update_attribute(data[0], data[1])
+      end
       render json: {message: 'Oração salva com sucesso'}
-    else
-      render json: {message: 'Erro ao salvar a oração'}
+    rescue => e
+      puts e
+      render json: {message: "Erro ao salvar oração: #{e}"}
     end
   end
 end

@@ -17,7 +17,15 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    Category.find(params[:id]).update_attribute(params[:key], params[:value])
-    render json: {message: 'Categoria salva com sucesso'}
+    begin
+      category = Category.find(params[:id])
+      params[:data].each do |data|
+        category.update_attribute(data[0], data[1])
+      end
+      render json: {message: 'Categoria salva com sucesso'}
+    rescue => e
+      puts e
+      render json: {message: "Erro ao salvar categoria: #{e}"}
+    end
   end
 end

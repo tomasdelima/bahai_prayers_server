@@ -1,8 +1,8 @@
-function sendRequest(id, key, value){
+function sendPrayerRequest(id, data){
   $.ajax({
     url:'prayers',
     type: 'POST',
-    data: {id: id, key: key, value: value},
+    data: {id: id, data: data},
     success: function(d){
       alert(d.message)
     },
@@ -20,9 +20,7 @@ function listenToSaveButton (){
     preamble = $('.preamble.id'+id).val()
     body = $('.body.id'+id).val()
     author = $('.author.id'+id).val()
-    sendRequest(id, "preamble", preamble)
-    sendRequest(id, "body",     body)
-    sendRequest(id, "author",   author)
+    sendPrayerRequest(id, { preamble: preamble, body: body, author: author })
   })
 }
 

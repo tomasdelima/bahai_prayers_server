@@ -1,8 +1,8 @@
-function sendRequest(id, key, value){
+function sendCategoryRequest(id, data){
   $.ajax({
     url:'categories',
     type: 'POST',
-    data: {id: id, key: key, value: value},
+    data: {id: id, data: data},
     success: function(a){
       alert(a.message)
     },
@@ -19,14 +19,14 @@ function listenToSave (){
     if(event.which == 13) {
       id = $(event.target).attr('id')
       title = $('#'+id).val()
-      sendRequest(id, 'title', title)
+      sendCategoryRequest(id, { title: title })
     }
   })
 
   $('.category input.middle').on('click', function(event){
     id = $(event.target).data('id')
     active = $(event.target).prop('checked')
-    sendRequest(id, 'active', active)
+    sendCategoryRequest(id, { active: active })
   })
 }
 
