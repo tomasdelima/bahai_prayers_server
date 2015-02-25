@@ -1,5 +1,5 @@
 class PrayersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :index_json_request?
 
   def index
     prayers = Prayer.all
@@ -21,5 +21,11 @@ class PrayersController < ApplicationController
       puts e
       render json: {message: "Erro ao salvar oração: #{e}"}
     end
+  end
+
+  private
+
+  def index_json_request?
+    params[:action] == 'index' && params[:format] == 'json'
   end
 end

@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :index_json_request?
 
   def index
     @categories = Category.all
@@ -29,5 +29,11 @@ class CategoriesController < ApplicationController
       puts e
       render json: {message: "Erro ao salvar categoria: #{e}"}
     end
+  end
+
+  private
+
+  def index_json_request?
+    params[:action] == 'index' && params[:format] == 'json'
   end
 end
