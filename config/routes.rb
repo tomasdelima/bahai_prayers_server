@@ -1,4 +1,5 @@
 BahaiPrayersServer::Application.routes.draw do
+  devise_for :users
   resources :prayers, only: :index
   resources :categories, only: [:index, :show] do
     resources :prayers
