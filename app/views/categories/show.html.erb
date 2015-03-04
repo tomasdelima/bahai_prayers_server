@@ -2,12 +2,16 @@
   <h1>Listando todas orações da categoria "<%= @category.title %>":</h1>
   <% @prayers.order(:body).each do |prayer| %>
     <div class='prayer'>
-      <%= label_tag :preamble %>
-      <input class="preamble id<%= prayer.id %>" value="<%= prayer.preamble %>" %>
-      <%= label_tag :body %>
-      <%= text_area_tag "prayer#{prayer.id}", prayer.body, class: "body body id#{prayer.id}" %>
-      <%= label_tag :author %>
-      <input class="author id<%= prayer.id %>" value="<%= prayer.author %>">
+      <%= label_tag "active#{prayer.id}", 'Active' %>
+      <input id="active<%= prayer.id %>" class="active" data-id="<%= prayer.id %>" type="checkbox" <%= prayer.active ? 'checked' : '' %>>
+      <br>
+      <%= label_tag "preamble#{prayer.id}", 'Preamble' %>
+      <input id="preamble<%= prayer.id %>" class="preamble id<%= prayer.id %>" value="<%= prayer.preamble %>" %>
+      <%= label_tag "body#{prayer.id}", 'Body' %>
+      <%= text_area_tag "prayer#{prayer.id}", prayer.body, class: "body body id#{prayer.id}", id: "body#{prayer.id}" %>
+      <%= label_tag "author#{prayer.id}", 'Author' %>
+      <input id="author<%= prayer.id %>" class="author id<%= prayer.id %>" value="<%= prayer.author %>">
+      <br>
       <button data-id="<%= prayer.id %>">Salvar</button>
       <hr>
     </div>

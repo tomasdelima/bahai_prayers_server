@@ -24,6 +24,17 @@ function listenToSaveButton (){
   })
 }
 
+function listenToActivateButton (){
+  $('.prayer .active').on('click', function(event){
+    var id, active
+
+    id = $(event.target).data('id')
+    active = $(this).prop('checked')
+    sendPrayerRequest(id, { active: active })
+  })
+}
+
 $(document).ready(function(){
   listenToSaveButton()
+  listenToActivateButton()
 })
