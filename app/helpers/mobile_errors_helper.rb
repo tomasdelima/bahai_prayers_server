@@ -1,0 +1,2 @@
+module MobileErrorsHelper
+end
