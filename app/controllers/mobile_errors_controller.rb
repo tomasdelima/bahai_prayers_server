@@ -1,8 +1,8 @@
 class MobileErrorsController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def create
     mobile_error = MobileError.create(message: params[:message])
-    respond_to do |format|
-      format.json { render json: mobile_error }
-    end
+    render json: mobile_error
   end
 end
