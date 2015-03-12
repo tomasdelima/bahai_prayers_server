@@ -5,10 +5,7 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     # @categories = @categories.where("updated_at > '#{Time.at(Integer(params[:last_updated_at])/1000)}'") if params[:last_updated_at]
     respond_to do |format|
-      format.json do
-        @categories = @categories.where(active: true)
-        render json: @categories.to_json
-      end
+      format.json { render json: @categories.to_json }
       format.html { render :index }
     end
   end
