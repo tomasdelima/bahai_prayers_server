@@ -1,16 +1,16 @@
 development:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
-  database: bahai_prayers_development
+  database: db/bahai_prayers_development.sqlite3
   pool: 5
   username: bahai_prayers
   password: bahai_prayers
   host: localhost
 
 test:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
-  database: bahai_prayers_test
+  database: db/bahai_prayers_test.sqlite3
   pool: 5
   username: bahai_prayers
   password: bahai_prayers
