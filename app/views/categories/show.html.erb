@@ -2,8 +2,10 @@
   <h1>Listando todas orações da categoria "<%= @category.title %>":</h1>
   <% @prayers.order(:body).each do |prayer| %>
     <div class='prayer'>
-      <%= label_tag "active#{prayer.id}", 'Active' %>
-      <input id="active<%= prayer.id %>" class="active" data-id="<%= prayer.id %>" type="checkbox" <%= prayer.active ? 'checked' : '' %>>
+      <%= label_tag "active#{prayer.id}", 'Active?' %>
+      <input id="active<%= prayer.id %>" data-field-name="active" data-id="<%= prayer.id %>" type="checkbox" <%= prayer.active ? 'checked' : '' %>>
+      <%= label_tag "special_prayer#{prayer.id}", 'Special prayer?' %>
+      <input id="special_prayer<%= prayer.id %>" data-field-name="special_prayer" data-id="<%= prayer.id %>" type="checkbox" <%= prayer.special_prayer ? 'checked' : '' %>>
       <br>
       <%= label_tag "preamble#{prayer.id}", 'Preamble' %>
       <input id="preamble<%= prayer.id %>" class="preamble id<%= prayer.id %>" value="<%= prayer.preamble %>" %>

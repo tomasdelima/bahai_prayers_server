@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!, unless: :index_json_request?
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order(:title)
     # @categories = @categories.where("updated_at > '#{Time.at(Integer(params[:last_updated_at])/1000)}'") if params[:last_updated_at]
     respond_to do |format|
       format.json { render json: @categories.to_json }

@@ -25,12 +25,15 @@ function listenToSaveButton (){
 }
 
 function listenToActivateButton (){
-  $('.prayer .active').on('click', function(event){
+  $('.prayer input[type=checkbox]').on('click', function(event){
     var id, active
 
     id = $(event.target).data('id')
-    active = $(this).prop('checked')
-    sendPrayerRequest(id, { active: active })
+    field_name = $(event.target).data('field-name')
+    value = $(this).prop('checked')
+    data = {}
+    data[field_name] = value
+    sendPrayerRequest(id, data)
   })
 }
 
