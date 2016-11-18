@@ -8,6 +8,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'activeadmin', github: 'activeadmin'
 
+group :assets do
+  gem 'uglifier'
+end
+
 group :doc do
   gem 'sdoc', require: false
 end

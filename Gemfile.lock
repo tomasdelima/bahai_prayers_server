@@ -164,6 +164,9 @@ GEM
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (0.3.42)
+    uglifier (2.7.0)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -182,6 +185,7 @@ DEPENDENCIES
   sdoc
   sqlite3
   turbolinks
+  uglifier
 
 BUNDLED WITH
    1.11.2
