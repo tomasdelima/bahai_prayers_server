@@ -3,11 +3,15 @@ class PrayersController < ApplicationController
 
   def index
     prayers = Prayer.all
-    # prayers = prayers.where("updated_at > '#{Time.at(Integer(params[:last_updated_at])/1000)}'") if params[:last_updated_at]
     prayers = prayers.where(category_id: params[:category_id]) if params[:category_id]
     prayers.each{|p| p.body = p.body.gsub(/(\n)+/, "<br><br>").html_safe}
 
-    render json: prayers.to_json
+    if params[:last_updated_at]
+      prayers = prayers.where("updated_at > '#{params[:last_updated_at]}'")
+      render json: {data: prayers.to_json, time: Time.now.utc}
+    else
+      render json: prayers.to_json
+    end
   end
 
   def update
