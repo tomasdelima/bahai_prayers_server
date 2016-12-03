@@ -2,14 +2,14 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!, unless: :index_json_request?
 
   def index
-    categories = Category.all.order(:title)
+    @categories = Category.all.order(:title)
     respond_to do |format|
       format.json {
         if params[:last_updated_at]
-          categories = categories.where("updated_at > '#{params[:last_updated_at]}'")
-          render json: {data: categories.to_json, time: Time.now.utc}
+          @categories = @categories.where("updated_at > '#{params[:last_updated_at]}'") if params[:last_updated_at] != '0'
+          render json: {data: @categories.to_json, time: Time.now.utc}
         else
-          render json: categories.to_json
+          render json: @categories.to_json
         end
       }
       format.html { render :index }

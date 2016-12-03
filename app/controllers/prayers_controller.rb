@@ -7,7 +7,7 @@ class PrayersController < ApplicationController
     prayers.each{|p| p.body = p.body.gsub(/(\n)+/, "<br><br>").html_safe}
 
     if params[:last_updated_at]
-      prayers = prayers.where("updated_at > '#{params[:last_updated_at]}'")
+      prayers = prayers.where("updated_at > '#{params[:last_updated_at]}'") if params[:last_updated_at] != '0'
       render json: {data: prayers.to_json, time: Time.now.utc}
     else
       render json: prayers.to_json
