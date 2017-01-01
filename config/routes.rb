@@ -7,6 +7,7 @@ BahaiPrayersServer::Application.routes.draw do
     resources :prayers
   end
   resources :books, only: [:index, :show]
+  resources :facts, only: [:index]
 
   get  'mobile_errors',      to: 'mobile_errors#create'
   post 'categories',         to: 'categories#update'

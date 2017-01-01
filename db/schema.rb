@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119005329) do
+ActiveRecord::Schema.define(version: 20170101140624) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -28,17 +28,18 @@ ActiveRecord::Schema.define(version: 20161119005329) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
-  create_table "books", force: true do |t|
-    t.boolean  "active"
-    t.string   "title"
-    t.text     "body"
-    t.string   "author"
+# Could not dump table "categories" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "facts", force: true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.text     "description"
+    t.integer  "relevance",   default: 1
+    t.boolean  "active",      default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-# Could not dump table "categories" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
 
   create_table "mobile_errors", force: true do |t|
     t.text     "message"
