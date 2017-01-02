@@ -15,7 +15,7 @@ ActiveAdmin.register Fact do
   form do |f|
     f.inputs "Admin Details" do
       f.input :name
-      f.input :date
+      f.input :date, as: :datepicker, placeholder: 'yyyy-mm-dd'
       f.input :description
       f.input :relevance
       f.input :active
